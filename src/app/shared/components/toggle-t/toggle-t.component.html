@@ -1,0 +1,17 @@
+<ion-item>
+  <ion-label slot="start">
+    {{ left }}
+  </ion-label>
+
+  <ion-toggle
+    [checked]="value"
+    (ionChange)="onChange($event)"
+    justify="center"
+    color="light">
+  </ion-toggle>
+
+  <ion-label slot="end">
+    {{ rigth }}
+  </ion-label>
+</ion-item>
+ 

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup,FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-
-
+import { FormControl, Validators } from '@angular/forms';  
+import { SharedModule } from 'src/app/shared/shared-module';
 
 
 
@@ -15,13 +13,20 @@ import { Router } from '@angular/router';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: false
+  
 })
 export class LoginPage implements OnInit {
 
   emailController:FormControl = new FormControl('',[Validators.required,Validators.email])
   passwordController:FormControl= new FormControl('',[Validators.required])
 
-  constructor() { }
+  public language = false;
+
+    public changeLang(state: boolean) {
+    const lang = state ? 'es' : 'en';
+    this.translateSrv.useLang(lang);
+  }
+  constructor( ) { }
 
   ngOnInit() {
   

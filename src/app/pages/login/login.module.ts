@@ -18,7 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     IonicModule,
     LoginPageRoutingModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [LoginPage]
 })
