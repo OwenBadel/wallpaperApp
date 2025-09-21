@@ -5,14 +5,18 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from '../shared/components/button/button.component';
 import { ToggleTComponent } from './components/toggle-t/toggle-t.component';
-
+import { FloatingButtonComponent } from './components/floating-button/floating-button.component';
+import { CardComponent } from './components/card-item/card-item.component';
 
 
 @NgModule({
   declarations: [
       InputComponent,
       ButtonComponent,
-      ToggleTComponent
+      ToggleTComponent,
+      FloatingButtonComponent,
+      CardComponent
+      
 
   ] ,
 providers:[],
@@ -26,7 +30,7 @@ providers:[],
 
   ],
 
-  exports:[InputComponent, ButtonComponent, ToggleTComponent]
+  exports:[InputComponent, ButtonComponent, ToggleTComponent, FloatingButtonComponent, CardComponent]
 
 })
 export class SharedModule { }
