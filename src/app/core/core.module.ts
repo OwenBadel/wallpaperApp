@@ -1,34 +1,58 @@
-import { NgModule } from '@angular/core';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { NgModule, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-// Firebase módulos clásicos
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 
 import { environment } from 'src/environments/environment';
+import { Auth } from './providers/auth/auth';
+import { Query } from './providers/query/query';
+import { File } from './providers/files/file';
+import { NativeToast } from './providers/nativeToast/nativeToast';
+import { Capacitor } from '@capacitor/core';
+import { Uploader } from './providers/uploader/uploader';
+import { Loading } from './providers/loadings/loading';
+import { Translate } from './providers/translate/translate';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient } from '@angular/common/http';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
-// Loader para traducciones
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader();
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
+const providers = [ Auth, Query, File, NativeToast, Uploader, Loading, Translate ];
+
 @NgModule({
-  imports: [
-    HttpClientModule,
+  declarations: [],
+  imports: [ CommonModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
+        deps: [HttpClient],
       }
     }),
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule,
-    AngularFirestoreModule
-  ],
-  exports: [TranslateModule]
+   ],
+  exports: [TranslateModule],
+  providers: [
+    provideFirebaseApp(() => initializeApp(environment.FIREBASE_CONFIG)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
+    ...providers
+  ]
 })
-export class CoreModule {}
+export class CoreModule implements OnInit{
+  
+  constructor(private readonly fileSrv: File) {
+    if (Capacitor.isNativePlatform()) {
+      this.ngOnInit()
+    }
+  }
+
+  async ngOnInit() {
+    this.fileSrv.requestPermissions();
+  }
+
+}

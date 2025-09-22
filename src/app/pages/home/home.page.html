@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <div class="ion-padding"></div>
+  </ion-toolbar>
+  <ion-toolbar color="dark">
+    <ion-title> {{ 'HOME.TITLE' | translate }} </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  @if (imgs) {
+    <ion-grid>
+      <ion-row>
+        @for (img of imgs; track $index) {
+          <ion-col size="6">
+            <app-card
+            class="ion-padding"
+            (click)="openActions()"
+            [image]="img"
+            ></app-card>
+          </ion-col>
+        }
+      </ion-row>
+    </ion-grid>
+  }
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <app-floating-button
+    color="dark"
+    icon="chevron-up-circle"
+    side="top"
+    [buttons]="[
+      { icon: 'log-out-outline', action: 'logout' },
+      { icon: 'add-circle-outline', action: 'add' },
+      { icon: 'person-circle-outline', action: 'profile' },
+    ]"
+    (buttonClick)="onButtonClick($event)"
+    ></app-floating-button>
+  </ion-fab>
+</ion-content>

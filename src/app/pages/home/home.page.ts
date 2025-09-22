@@ -1,4 +1,3 @@
-
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { File } from 'src/app/core/providers/files/file';
@@ -6,7 +5,7 @@ import { Loading } from 'src/app/core/providers/loadings/loading';
 import { Translate } from 'src/app/core/providers/translate/translate';
 import { Uploader } from 'src/app/core/providers/uploader/uploader';
 import { IImage } from 'src/app/interfaces/image.interface';
-import { ActionSheet } from 'src/app/core/providers/actionSheet/actionSheet';
+import { ActionSheet } from 'src/app/shared/providers/actionSheet/actionSheet';
 import { User } from 'src/app/shared/services/user/user';
 
 @Component({

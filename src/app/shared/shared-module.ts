@@ -7,7 +7,7 @@ import { ButtonComponent } from '../shared/components/button/button.component';
 import { ToggleTComponent } from './components/toggle-t/toggle-t.component';
 import { FloatingButtonComponent } from './components/floating-button/floating-button.component';
 import { CardComponent } from './components/card-item/card-item.component';
-
+import { LinkComponent } from './components/link-item/link-item.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +15,8 @@ import { CardComponent } from './components/card-item/card-item.component';
       ButtonComponent,
       ToggleTComponent,
       FloatingButtonComponent,
-      CardComponent
+      CardComponent,
+      LinkComponent
       
 
   ] ,
@@ -30,7 +31,7 @@ providers:[],
 
   ],
 
-  exports:[InputComponent, ButtonComponent, ToggleTComponent, FloatingButtonComponent, CardComponent]
+  exports:[InputComponent, ButtonComponent, ToggleTComponent, FloatingButtonComponent, CardComponent, LinkComponent]
 
 })
 export class SharedModule { }

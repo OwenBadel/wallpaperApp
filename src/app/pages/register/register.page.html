@@ -1,23 +1,68 @@
-<ion-content [fullscreen]="true">
-
-  <form (submit)="onSubmit()">
-
-
-    <app-input label="Name" type="text"   [clear]="true" placeholder="Valery" [required]="true" labelPlacement="stacked" fill="outline"></app-input>
-
-    <app-input label="Lastname" type="text"   [clear]="true" placeholder="Parra" [required]="true" labelPlacement="stacked" fill="outline"></app-input>
-
-    <app-input label="Email" type="email"   [clear]="true" placeholder="owen@gmail.com" [required]="true" labelPlacement="stacked" fill="outline"></app-input>
-
-
-    <app-input label="Password" type="password"  placeholder="********" [required]="true" labelPlacement="stacked" fill="outline"></app-input>
-
-
-    <app-button ClickHere="Sign up" type="submit" size="small" shape="round" expand="block" fill="outline" > </app-button>
-
-    <app-button ClickHere="Already have account?" size="small" expand="block" fill="clear" routerLink="/login"></app-button>
-  
-
-    <!-- debo agregar el icono <-- usando la doc de ionic-->
-  </form>
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <form
+      [formGroup]="registerForm"
+      (ngSubmit)="doRegister()">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <app-input
+              type="text"
+              [label]="'REGISTER.NAME' | translate"
+              placeholder="Jane"
+              [control]="name"
+              ></app-input>
+            </ion-col>
+            <ion-col>
+              <app-input
+              type="text"
+              [label]="'REGISTER.LASTNAME' | translate"
+              placeholder="Doe"
+              [control]="lastName"
+              ></app-input>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <app-input
+              type="email"
+              [label]="'REGISTER.EMAIL' | translate"
+              placeholder="jane@doe.com"
+              [control]="email"
+              ></app-input>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <app-input
+              type="password"
+              [label]="'REGISTER.PASSWORD' | translate"
+              placeholder="**************"
+              [control]="password"
+              ></app-input>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <app-link
+              link="/login"
+              [value]="'REGISTER.' | translate"
+              ></app-link>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <app-button
+              type="submit"
+              color="dark"
+              [disabled]="registerForm.invalid"
+              [value]="'REGISTER.BUTTON' | translate"
+              ></app-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
