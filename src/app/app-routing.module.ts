@@ -9,8 +9,7 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
-    canActivate: [AuthGuard],
-    data: {authGuardPipe: isLogged},
+ 
   },
   {
     path: 'register',
@@ -19,12 +18,11 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule),
-    canActivate: [AuthGuard],
-    data: {authGuardPipe: isNotLogged},
+ 
   },
   {
-    path: '**',
-    redirectTo: 'login',
+    path: '',
+    redirectTo: '/login',
     pathMatch: 'full'
   },
 ];

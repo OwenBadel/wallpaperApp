@@ -1,26 +1,31 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
+type InputType = "date" | "datetime-local" | "email" | "month" | "number" | "password" | "search" | "tel" | "text" | "time" | "url" | "week";
+
 @Component({
   selector: 'app-input',
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
-   standalone: false
+  standalone: false,
 })
 export class InputComponent  implements OnInit {
 
-  @Input() label:string = '';
-  @Input() type: 'text' | 'email' | 'password' = 'text';
-  @Input() clear: boolean = false;
+  @Input() type: InputType = 'text';
+  @Input() label: string = '';
   @Input() placeholder: string = '';
+  @Input() control: FormControl = new FormControl();
+  @Input() clear: boolean = false;
   @Input() required: boolean = false;
-  @Input() labelPlacement: 'floating' | 'stacked' | 'fixed' | '' = '';
-@Input() fill: 'solid' | 'outline' | 'clear' | '' = '';
-@Input() FormController: FormControl = new FormControl();
 
-  constructor() { } 
 
+
+  constructor() { }
 
   ngOnInit() {}
+
+  public onType(event: any) {
+    this.control.setValue(event.target.value);
+  }
 
 }

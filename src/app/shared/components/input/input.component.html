@@ -1,1 +1,12 @@
-    <ion-input [placeholder]="placeholder" [required]="required"  [label]="label" [type]="type" [clearInput]="clear" [labelPlacement]="labelPlacement" [fill]="fill" [formControl]="FormController"></ion-input>
+<ion-input
+[type]="type"
+[label]="label"
+[placeholder]="placeholder"
+labelPlacement="stacked"
+fill="solid"
+(keyup)="onType($event)"
+>
+@if (type === 'password') {
+  <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+}
+</ion-input>

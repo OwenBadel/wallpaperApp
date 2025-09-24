@@ -1,20 +1,21 @@
 import { Component, Input, OnInit } from '@angular/core';
 
+type ButtonType = "button" | "reset" | "submit";
+type ColorType =  "danger" | "dark" | "light" | "medium" | "primary" | "secondary" | "success" | "tertiary" | "warning";
+
 @Component({
   selector: 'app-button',
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
-  standalone: false
-  
+  standalone: false,
 })
 export class ButtonComponent  implements OnInit {
 
-  @Input() ClickHere: string = '';
-  @Input() shape: 'round' | 'square' | ''= '';
-  @Input() expand: 'full' | 'block' | 'outline' | ''= '';
-  @Input() fill: 'solid' | 'clear' | 'outline' | ''= '';
-  @Input() size: 'small' | 'default' | 'large' | '' = '';
-  @Input() type: 'button' | 'submit' | 'reset' = 'button';
+  @Input() type: ButtonType = 'button';
+  @Input() color: ColorType = 'primary';
+  @Input() disabled: boolean = false;
+  @Input() value: string = '';
+  @Input() icon: string = '';
 
   constructor() { }
 

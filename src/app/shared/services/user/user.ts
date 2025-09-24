@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core';
 import { Auth } from 'src/app/core/providers/auth/auth';
 import { Query } from 'src/app/core/providers/query/query';
