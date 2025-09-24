@@ -17,8 +17,24 @@ import { LinkComponent } from './components/link/link.component';
 import { User } from './services/user/user';
 import { ActionSheet } from './providers/actionSheet/actionSheet';
 
-const modules = [CommonModule, FormsModule, ReactiveFormsModule, IonicModule, RouterModule, TranslateModule];
-const components = [InputComponent, ButtonComponent, ToggleTComponent, CardComponent, FloatingButtonComponent, LinkComponent];
+const modules = [
+  CommonModule, 
+  FormsModule, 
+  ReactiveFormsModule, // ✅ IMPORTANTE para formularios reactivos
+  IonicModule, 
+  RouterModule, 
+  TranslateModule
+];
+
+const components = [
+  InputComponent, 
+  ButtonComponent, 
+  ToggleTComponent, 
+  CardComponent, 
+  FloatingButtonComponent, 
+  LinkComponent
+];
+
 const providers = [User, ActionSheet];
 
 @NgModule({

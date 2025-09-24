@@ -1,12 +1,38 @@
+<!-- ✅ CORREGIDO: Binding completo del FormControl -->
 <ion-input
-[type]="type"
-[label]="label"
-[placeholder]="placeholder"
-labelPlacement="stacked"
-fill="solid"
-(keyup)="onType($event)"
->
-@if (type === 'password') {
-  <ion-input-password-toggle slot="end"></ion-input-password-toggle>
-}
+  [type]="type"
+  [label]="label"
+  [placeholder]="placeholder"
+  [formControl]="control"
+  labelPlacement="stacked"
+  fill="solid"
+  [required]="required"
+  [clearInput]="clear"
+  class="custom-input">
+  
+  <ion-icon 
+    *ngIf="type === 'email'" 
+    name="mail-outline" 
+    slot="start">
+  </ion-icon>
+  
+  <ion-input-password-toggle 
+    *ngIf="type === 'password'" 
+    slot="end">
+  </ion-input-password-toggle>
 </ion-input>
+
+<!-- ✅ AGREGADO: Mensajes de error -->
+<div class="error-message" *ngIf="control && control.invalid && control.touched">
+  <ion-text color="danger">
+    <small *ngIf="control.errors?.['required']">
+      {{ label }} is required
+    </small>
+    <small *ngIf="control.errors?.['email']">
+      Please enter a valid email
+    </small>
+    <small *ngIf="control.errors?.['minlength']">
+      Minimum {{ control.errors?.['minlength'].requiredLength }} characters required
+    </small>
+  </ion-text>
+</div>

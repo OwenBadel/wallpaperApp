@@ -9,23 +9,21 @@ type InputType = "date" | "datetime-local" | "email" | "month" | "number" | "pas
   styleUrls: ['./input.component.scss'],
   standalone: false,
 })
-export class InputComponent  implements OnInit {
+export class InputComponent implements OnInit {
 
   @Input() type: InputType = 'text';
   @Input() label: string = '';
   @Input() placeholder: string = '';
-  @Input() control: FormControl = new FormControl();
+  @Input() control: FormControl = new FormControl(); // ✅ CORREGIDO: Control por defecto
   @Input() clear: boolean = false;
   @Input() required: boolean = false;
 
-
-
   constructor() { }
 
-  ngOnInit() {}
-
-  public onType(event: any) {
-    this.control.setValue(event.target.value);
+  ngOnInit() {
+    // ✅ AGREGADO: Validación inicial
+    if (!this.control) {
+      this.control = new FormControl('');
+    }
   }
-
 }

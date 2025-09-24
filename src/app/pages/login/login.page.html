@@ -1,25 +1,56 @@
-<ion-content [fullscreen]="true">
-
-
-  <form>
-
-    <app-input label="Email" type="email"   [clear]="true" placeholder="owen@gmail.com" [required]="true" labelPlacement="stacked" fill="outline"></app-input>
-
-    <app-input label="Password" type="password"  placeholder="********" [required]="true" labelPlacement="stacked" fill="outline"></app-input>
-
-
-    <app-button ClickHere="Sign in" type="submit" size="small" shape="round" expand="block" fill="outline" > </app-button>
-
-    <app-button ClickHere="Create an account" size="small" expand="block" fill="clear" routerLink="/register"></app-button>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="login-container">
     
-    <app-togglet    [(value)]="language"
-              left="🇺🇸"
-              rigth="🇨🇴"
-              (valueChange)="changeLang($event)"> 
-      
-    </app-togglet>
+    <div class="logo-section">
+      <ion-icon name="images-outline" size="large" color="primary"></ion-icon>
+      <h1>{{ 'LOGIN.TITLE' | translate }}</h1>
+    </div>
 
+    <!-- ✅ CORREGIDO: Formulario correctamente enlazado -->
+    <div [formGroup]="loginForm" class="form-container">
 
-  </form>
+      <app-input 
+        label="{{ 'LOGIN.EMAIL' | translate }}" 
+        type="email" 
+        [control]="email"
+        placeholder="owen@gmail.com" 
+        [required]="true">
+      </app-input>
 
+      <app-input 
+        label="{{ 'LOGIN.PASSWORD' | translate }}" 
+        type="password"
+        [control]="password" 
+        placeholder="********" 
+        [required]="true">
+      </app-input>
+
+      <div class="button-container">
+        <app-button 
+          [value]="'LOGIN.BUTTON' | translate" 
+          type="button" 
+          color="primary"
+          [disabled]="loginForm.invalid"
+          (click)="logIn()">
+        </app-button>
+
+        <app-button 
+          [value]="'LOGIN.LINK' | translate" 
+          color="medium"
+          fill="clear" 
+          routerLink="/register">
+        </app-button>
+      </div>
+
+      <div class="language-toggle">
+        <app-togglet    
+          [(value)]="language"
+          left="🇺🇸"
+          rigth="🇨🇴"
+          (valueChange)="changeLang($event)"> 
+        </app-togglet>
+      </div>
+
+    </div>
+  </div>
 </ion-content>

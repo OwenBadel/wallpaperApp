@@ -1,9 +1,18 @@
 <ion-button
-[type]="type"
-[color]="color"
-[disabled]="disabled"
-expand="block"
->
-{{ value }}
-<ion-icon [name]="icon"></ion-icon>
+  [type]="type"
+  [color]="color"
+  [disabled]="disabled"
+  [fill]="fill"
+  [size]="size"
+  [shape]="shape"
+  [expand]="expand"
+  (click)="onClick()">
+  
+  <ion-icon 
+    *ngIf="icon" 
+    [name]="icon" 
+    [slot]="iconSlot">
+  </ion-icon>
+  
+  {{ value }}
 </ion-button>

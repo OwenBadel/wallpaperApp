@@ -1,5 +1,7 @@
+
 {
     "LOGIN": {
+        "TITLE": "Welcome",
         "EMAIL": "Email",
         "PASSWORD": "Password",
         "LINK": "Don't have an account?",
@@ -14,10 +16,16 @@
         "BUTTON": "Register"
     },
     "HOME": {
-        "TITLE": "My Wallpaper",
+        "TITLE": "My Wallpapers",
         "ACTIONS": "Actions",
-        "LOCKSCREAN": "Lock screan",
-        "HOMESCREAN": "Home screan",
+        "LOCKSCREAN": "Set as Lock Screen",
+        "HOMESCREAN": "Set as Home Screen",
         "CANCEL": "Cancel"
+    },
+    "COMMON": {
+        "LOADING": "Please wait...",
+        "ERROR": "An error occurred",
+        "SUCCESS": "Success!"
     }
 }
+

@@ -1,17 +1,24 @@
-
 import { Injectable } from '@angular/core';
-import { Auth as AuthFirebase, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
+import { Auth as AuthFirebase, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, User } from '@angular/fire/auth';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class Auth {
+  private currentUserSubject = new BehaviorSubject<User | null>(null);
+  public currentUser$: Observable<User | null> = this.currentUserSubject.asObservable();
 
   constructor(
     private readonly afb: AuthFirebase,
-  ) {}
+  ) {
+    // Monitor auth state changes
+    onAuthStateChanged(this.afb, (user) => {
+      this.currentUserSubject.next(user);
+    });
+  }
 
-  async register(correo: string, password: string) {
+  async register(correo: string, password: string): Promise<string> {
     try {
       const resp = await createUserWithEmailAndPassword(
         this.afb,
@@ -20,12 +27,12 @@ export class Auth {
       );
       return resp.user.uid;
     } catch (error) {
-      console.log(error);
-      return '';
+      console.error('Registration error:', error);
+      throw error;
     }
   }
 
-  async logIn(correo: string, password: string) {
+  async logIn(correo: string, password: string): Promise<void> {
     try {
       await signInWithEmailAndPassword(
         this.afb,
@@ -33,16 +40,26 @@ export class Auth {
         password,
       );
     } catch (error) {
-      console.log(error);
+      console.error('Login error:', error);
+      throw error;
     }
   }
 
-  async logOut() {
+  async logOut(): Promise<void> {
     try {
       await signOut(this.afb);
     } catch (error) {
-      console.log(error);
+      console.error('Logout error:', error);
+      throw error;
     }
+  }
+
+  getCurrentUser(): User | null {
+    return this.afb.currentUser;
+  }
+
+  isAuthenticated(): boolean {
+    return !!this.afb.currentUser;
   }
   
 }

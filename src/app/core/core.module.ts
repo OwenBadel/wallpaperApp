@@ -19,22 +19,24 @@ import { HttpClient } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
-  return new TranslateHttpLoader(   );
+  return new TranslateHttpLoader();
 }
 
 const providers = [ Auth, Query, File, NativeToast, Uploader, Loading, Translate ];
 
 @NgModule({
   declarations: [],
-  imports: [ CommonModule,
+  imports: [ 
+    CommonModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient],
-      }
+      },
+      defaultLanguage: 'en'
     }),
-   ],
+  ],
   exports: [TranslateModule],
   providers: [
     provideFirebaseApp(() => initializeApp(environment.FIREBASE_CONFIG)),
@@ -43,7 +45,7 @@ const providers = [ Auth, Query, File, NativeToast, Uploader, Loading, Translate
     ...providers
   ]
 })
-export class CoreModule implements OnInit{
+export class CoreModule implements OnInit {
   
   constructor(private readonly fileSrv: File) {
     if (Capacitor.isNativePlatform()) {
@@ -52,7 +54,7 @@ export class CoreModule implements OnInit{
   }
 
   async ngOnInit() {
-    this.fileSrv.requestPermissions();
+    await this.fileSrv.requestPermissions();
   }
 
 }
